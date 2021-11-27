@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bulma": "^0.9.3",
+    "json-server": "^0.17.0",
     "sass": "^1.43.5",
     "vue": "^3.2.16"
   },

@@ -1,17 +1,17 @@
 # Formation EMAGMA - Vue 3 + Vite
 
-## step1-home
+## step2-api
 
 ### Objectifs
 
-- Créer une page d'accueil personnalisée
-  - création de la page `src/views/Home.vue`
-- Ajout de quelques styles CSS avec le pré-processeur sass
-  - `$ npm add sass bulma`
-  - définition des variables de bulma dans `src/assets/scss/styles.scss`
-- Configurer un alias vers `src`
-  - modification de la config `vite.config.js`
-- Supprimer le code de démo
-  - suppression du composant `src/components/HelloWorld.vue`
-  - modification du composant `src/App.vue` pour importer `Home` ainsi que le fichier de styles
-
+- Création d'un serveur API basique
+  - `npm install json-server`
+  - Création du fichier `db.json`
+  - Création du Makefile
+  - Lancement du serveur : `make db-server`
+- Connexion de l'application Vue avec le serveur
+- Création d'une barre de menu avec la liste des catégories
+  - `src/App.vue`
+  - `index.html`
+- Affichage des produits mis en avant sur la page d'accueil
+  - `src/views/Home.vue`

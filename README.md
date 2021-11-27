@@ -1,12 +1,13 @@
 # Formation EMAGMA - Vue 3 + Vite
 
-## step4-vuerouter
+## step5-product
 
 ### Objectifs
 
-- Ajout du router Vue
-  - `npm install vue-router@4` (attention la version par défaut est encore la version 3, pour 
-    Vue.js 2.x)
-  - création du fichier de config `./router.js`
-  - création de l'instance du router `./src/main.js`
-  - mise à jour du fichier `src/App.vue` pour utiliser le router
+- Création d'un composant `ProductItem`
+  - Code des blocs produits extrait dans un nouveau composant `src/components/product-list/ProductItem.vue`
+  - Utilisation du composant dans la page `src/views/Category.vue`
+  - Utilisation du composant dans la page `src/views/Home.vue`
+- Création d'une page produit
+  - Création de la page `src/views/Product.vue`
+  - Configuration de la page dans le router `src/router.js`

@@ -2,15 +2,15 @@
   <nav class="navbar is-fixed-top is-dark">
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-start">
-        <p class="navbar-item is-clickable" @click="currentCategory = null">Accueil</p>
-        <p
+        <router-link class="navbar-item" :to="{ name: 'homepage' }">Accueil</router-link>
+        <router-link
           v-for="category in categories"
           :key="category.id"
-          class="navbar-item is-clickable"
-          @click="currentCategory = category.id"
+          class="navbar-item"
+          :to="{ name: 'category', params: { 'id': category.id }}"
         >
           {{ category.name }}
-        </p>
+        </router-link>
       </div>
 
       <div class="navbar-end">
@@ -24,24 +24,16 @@
     </div>
   </nav>
 
-  <Category v-if="currentCategory" :id="currentCategory" :key="currentCategory" />
-  <Home v-else />
+  <router-view :key="$route.fullPath"></router-view>
 
 </template>
 
 <script>
 import { api } from '@/api';
-import Category from '@/views/Category.vue';
-import Home from '@/views/Home.vue';
 
 export default {
-  components: {
-    Category,
-    Home,
-  },
   data() {
     return {
-      currentCategory: null,
       categories: [],
     };
   },

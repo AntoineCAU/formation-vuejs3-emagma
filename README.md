@@ -1,9 +1,12 @@
 # Formation EMAGMA - Vue 3 + Vite
 
-## step3-category
+## step4-vuerouter
 
 ### Objectifs
 
-- Ajout d'une page catégorie
-  - Création d'une page `src/views/Category.vue`
-  - Temporairement, le composant est chargé au clic depuis `App.vue` à la place de la page d'accueil
+- Ajout du router Vue
+  - `npm install vue-router@4` (attention la version par défaut est encore la version 3, pour 
+    Vue.js 2.x)
+  - création du fichier de config `./router.js`
+  - création de l'instance du router `./src/main.js`
+  - mise à jour du fichier `src/App.vue` pour utiliser le router

@@ -1,11 +1,6 @@
 <template>
   <div class="section category" v-if="category">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-      <ul>
-        <li><a href="#">Homepage</a></li>
-        <li class="is-active"><a href="#" aria-current="page">{{ category.name }}</a></li>
-      </ul>
-    </nav>
+    <breadcrumbs :current="category.name" />
     <h1 class="title">{{ category.name }}</h1>
     <div class="notification is-primary">{{ category.description }}</div>
 
@@ -27,11 +22,13 @@
 
 <script>
 import { api } from '@/api';
+import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import ProductItem from '@/components/product-list/ProductItem.vue';
 
 export default {
   components: {
     ProductItem,
+    Breadcrumbs,
   },
   data() {
     return {
@@ -42,9 +39,14 @@ export default {
   props: {
     id: { type: String, required: true },
   },
-  async created() {
-    this.category = await api.get(`/categories/${this.id}`);
-    this.products = await api.get(`/products?categoryId=${this.id}&_embed=colors`);
+  watch: {
+    id: {
+      async handler() {
+        this.category = await api.get(`/categories/${ this.id }`);
+        this.products = await api.get(`/products?categoryId=${ this.id }&_embed=colors`);
+      },
+      immediate: true,
+    },
   },
 }
 </script>

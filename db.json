@@ -1,18 +1,18 @@
 {
   "categories": [
     {
-      "id":  "ab0ed779-4261-4cef-8977-493b3a07d9d1",
-      "name":  "Tables",
+      "id": "ab0ed779-4261-4cef-8977-493b3a07d9d1",
+      "name": "Tables",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac cursus dolor."
     },
     {
-      "id":  "f8df22f5-af53-44c4-93dd-d9da4c744b5c",
-      "name":  "Chaises",
+      "id": "f8df22f5-af53-44c4-93dd-d9da4c744b5c",
+      "name": "Chaises",
       "description": "Quisque euismod dignissim sollicitudin. Curabitur porttitor at est non porta."
     },
     {
-      "id":  "a185439a-0b51-4ee1-bfac-b796e44d68e3",
-      "name":  "Lit",
+      "id": "a185439a-0b51-4ee1-bfac-b796e44d68e3",
+      "name": "Lit",
       "description": "Nunc ipsum lectus, posuere quis finibus nec, suscipit vel velit. Proin volutpat lectus et ultrices convallis. Morbi eget enim tortor."
     }
   ],

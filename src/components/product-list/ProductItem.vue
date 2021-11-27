@@ -3,13 +3,19 @@
     <div class="card product">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img :src="product.imageUrl" :alt="product.name">
+          <router-link :to="{ name: 'product', params: { id: product.id }}">
+            <img :src="product.imageUrl" :alt="product.name">
+          </router-link>
         </figure>
       </div>
       <div class="card-content">
         <div class="media">
           <div class="media-content">
-            <p class="title is-4">{{ product.name }}</p>
+            <p class="title is-4">
+              <router-link :to="{ name: 'product', params: { id: product.id }}">
+                {{ product.name }}
+              </router-link>
+            </p>
 
             <div class="tags are-large is-pulled-right">
               <span class="tag is-primary is-rounded">
@@ -32,7 +38,6 @@
               </div>
             </div>
           </div>
-          <button class="button is-success" :disabled="0 === product.colors.length">Voir le produit</button>
         </div>
       </div>
     </div>
@@ -40,15 +45,13 @@
 </template>
 
 <script>
+import ProductMixin from '@/mixins/ProductMixin.js';
+
 export default {
   props: {
     product: { type: Object, required: true },
   },
-  methods: {
-    format(price) {
-      return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price / 100);
-    },
-  }
+  mixins: [ProductMixin],
 }
 </script>
 

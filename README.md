@@ -1,27 +1,17 @@
 # Formation EMAGMA - Vue 3 + Vite
 
-## Pré-requis
-
-- Une version récente de npm ou yarn
-- Un IDE configuré avec les plugins Vue.js 3. Recommandation officielle :
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
-
-## step0-init
+## step1-home
 
 ### Objectifs
 
-- Installation d'une application Vue.js 3 avec Vite
-- Installation des dépendances de base
-- Analyser la structure des répertoires et des fichiers de base
-- Lancer l'application en mode dev
+- Créer une page d'accueil personnalisée
+  - création de la page `src/views/Home.vue`
+- Ajout de quelques styles CSS avec le pré-processeur sass
+  - `$ npm add sass bulma`
+  - définition des variables de bulma dans `src/assets/scss/styles.scss`
+- Configurer un alias vers `src`
+  - modification de la config `vite.config.js`
+- Supprimer le code de démo
+  - suppression du composant `src/components/HelloWorld.vue`
+  - modification du composant `src/App.vue` pour importer `Home` ainsi que le fichier de styles
 
----
-
-```shell
-$ npm init vite@latest formation-vuejs3-emagma -- --template vue
-$ cd formation-vuejs3-emagma
-$ npm install
-$ npm run dev
-```
-
-=> http://localhost:3000/

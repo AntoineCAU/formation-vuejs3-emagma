@@ -1,17 +1,9 @@
 # Formation EMAGMA - Vue 3 + Vite
 
-## step2-api
+## step3-category
 
 ### Objectifs
 
-- Création d'un serveur API basique
-  - `npm install json-server`
-  - Création du fichier `db.json`
-  - Création du Makefile
-  - Lancement du serveur : `make db-server`
-- Connexion de l'application Vue avec le serveur
-- Création d'une barre de menu avec la liste des catégories
-  - `src/App.vue`
-  - `index.html`
-- Affichage des produits mis en avant sur la page d'accueil
-  - `src/views/Home.vue`
+- Ajout d'une page catégorie
+  - Création d'une page `src/views/Category.vue`
+  - Temporairement, le composant est chargé au clic depuis `App.vue` à la place de la page d'accueil

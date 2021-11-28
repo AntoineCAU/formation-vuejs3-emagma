@@ -12,20 +12,23 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
-  data() {
-    return {
-      color: null,
-    };
-  },
   props: {
     product: { type: Object, required: true },
   },
-  methods: {
-    setColor(value) {
-      this.color = value;
-      this.$emit('setQtyMax', this.product.colors.find((el) => el.id === value).qtyInStock);
+  setup(props, { emit }) {
+    const color = ref();
+    const setColor = (value) => {
+      color.value = value;
+      const selectedColor = props.product.colors.find((el) => el.id === value);
+      emit('setQtyMax', selectedColor?.qtyInStock);
     }
+
+    return {
+      setColor,
+    };
   },
 }
 </script>

@@ -46,7 +46,9 @@
           </ul>
         </div>
         <keep-alive>
-          <component class="content" :is="activeTab" />
+          <transition name="slide-fade">
+            <component class="content" :is="activeTab" />
+          </transition>
         </keep-alive>
       </div>
     </div>
@@ -90,3 +92,18 @@ watch(
   { immediate: true },
 )
 </script>
+
+<style lang="scss">
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+  opacity: 0;
+}
+.slide-fade-enter-from, .fade-leave-to {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

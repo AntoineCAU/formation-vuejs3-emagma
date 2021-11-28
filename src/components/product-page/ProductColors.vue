@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <select name="color" @change="setColor($event.target.value)">
+  <div v-if="product.colors.length">
+    <select name="color" @change="setColor">
       <option>Couleur...</option>
       <option
         v-for="color in product.colors"
@@ -12,17 +12,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
-const props = defineProps({
-  product: { type: Object, required: true },
-});
-
-const emit = defineEmits(['setQtyMax']);
-const color = ref();
-
+const store = useStore();
+const product = computed(() => store.state.product.item);
 const setColor = (value) => {
-  color.value = value;
-  emit('setQtyMax', props.product.colors.find((el) => el.id === value).qtyInStock);
+  store.dispatch('product/setColor', value.target.value);
 }
 </script>

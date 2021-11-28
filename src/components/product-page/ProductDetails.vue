@@ -3,7 +3,9 @@
 </template>
 
 <script setup>
-defineProps({
-  product: { type: Object, required: true },
-});
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const product = computed(() => store.state.product.item);
 </script>

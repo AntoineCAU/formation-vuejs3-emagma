@@ -1,21 +1,14 @@
 # Formation EMAGMA - Vue 3 + Vite
 
-## step8-script-setup
+## step9-vuex
 
 ### Objectifs
 
-- Migration de tous les composants avec l'API Composition et la syntaxe recommandée "script setup"
-  - `src/components/product-list/ProductItem.vue`
-  - `src/components/product-page/ProductColors.vue`
-  - `src/components/product-page/ProductCommentForm.vue`
-  - `src/components/product-page/ProductComments.vue`
-  - `src/components/product-page/ProductDetails.vue`
-  - `src/components/product-page/ProductQuantity.vue`
-  - `src/components/Breadcrumbs.vue`
-  - `src/views/Category.vue`
-  - `src/views/Home.vue`
-  - `src/views/Product.vue`
-- Suppression du mixin `src/mixins/ProductMixin.js`
-- Création de composables réutilisables
-  - `src/composables/useFormatDate.js`
-  - `src/composables/useFormatPrice.js`
+- Mise en place d'un store global
+  - `npm install vuex@4` (version pour Vue.js 3.x)
+  - création de la config du store dans `src/store/`
+  - création de l'instance du store `src/main.js`
+- Création d'un composant pour le menu
+  - Nouveau composant `src/components/Navbar.vue`
+  - Utilisation du composant dans `src/App.vue`
+- Utilisation du store global

@@ -21,22 +21,24 @@
 </template>
 
 <script setup>
-import { ref, toRef, watch } from 'vue';
-import { api } from '@/api';
+import { computed, toRef, watch } from 'vue';
+import { useStore } from 'vuex';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import ProductItem from '@/components/product-list/ProductItem.vue';
 
 const props = defineProps({
   id: { type: String, required: true },
 });
-const category = ref(null);
-const products = ref([]);
+
+const store = useStore();
+const category = computed(() => store.state.category.item);
+const products = computed(() => store.state.product.items);
 
 watch(
   toRef(props, 'id'),
   async () => {
-    category.value = await api.get(`/categories/${props.id}`);
-    products.value = await api.get(`/products?categoryId=${props.id}&_embed=colors`);
+    await store.dispatch('category/fetch', props.id);
+    await store.dispatch('product/fetchByCategory', props.id);
   },
   { immediate: true },
 )

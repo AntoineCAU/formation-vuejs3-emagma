@@ -27,12 +27,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
 import { formatDate } from '@/composables/useFormatDate.js';
 import ProductCommentForm from './ProductCommentForm.vue';
 
-defineProps({
-  product: { type: Object, required: true },
-});
+const store = useStore();
+const product = computed(() => store.state.product.item);
 const showForm = ref(true);
 </script>

@@ -32,18 +32,8 @@
         </div>
 
         <div class="is-flex is-justify-content-space-between is-align-items-baseline">
-          <product-colors
-            v-if="product.colors.length"
-            class="select is-rounded is-medium is-warning"
-            :product="product"
-            @setQtyMax="qtyMax = $event"
-          />
-
-          <product-quantity
-            class="is-flex is-align-items-baseline"
-            :product="product"
-            :qty-max="qtyMax"
-          />
+          <product-colors class="select is-rounded is-medium is-warning" />
+          <product-quantity class="is-flex is-align-items-baseline" />
         </div>
 
         <div class="tabs is-boxed is-medium">
@@ -56,7 +46,7 @@
           </ul>
         </div>
         <keep-alive>
-          <component class="content" :is="activeTab" :product="product"/>
+          <component class="content" :is="activeTab" />
         </keep-alive>
       </div>
     </div>
@@ -64,8 +54,8 @@
 </template>
 
 <script setup>
-import { ref, computed, shallowRef, watch, toRef } from 'vue';
-import { api } from '@/api';
+import { computed, shallowRef, watch, toRef } from 'vue';
+import { useStore } from 'vuex';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import ProductColors from '@/components/product-page/ProductColors.vue';
 import ProductComments from '@/components/product-page/ProductComments.vue';
@@ -77,9 +67,10 @@ const props = defineProps({
   id: { type: String, required: true },
 });
 
+const store = useStore();
+const product = computed(() => store.state.product.item);
+
 const activeTab = shallowRef(ProductDetails);
-const qtyMax = ref(0);
-const product = ref(null);
 const tabs = computed(() => {
   const tabs = [{ label: 'Détails', component: ProductDetails }];
   if (0 < product.value.comments.length) {
@@ -91,7 +82,7 @@ const tabs = computed(() => {
 watch(
   toRef(props, 'id'),
   async () => {
-    product.value = await api.get(`/products/${props.id}?_embed=colors&_embed=comments&_expand=category`);
+    await store.dispatch('product/fetch', props.id);
   },
   { immediate: true },
 )

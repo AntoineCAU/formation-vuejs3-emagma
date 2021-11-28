@@ -40,16 +40,14 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
-import { api } from '@/api';
+import { computed, ref, reactive } from 'vue';
+import { useStore } from 'vuex';
 
-const props = defineProps({
-  product: { type: Object, required: true },
-});
-
+const store = useStore();
+const product = computed(() => store.state.product.item);
 const emits = defineEmits(['hide']);
 
-const emptyComment = { comment: '', note: 5, author: '', productId: props.product.id };
+const emptyComment = { comment: '', note: 5, author: '' };
 let comment = reactive(emptyComment);
 const error = ref(null);
 
@@ -63,7 +61,7 @@ const submit = async () => {
   comment.date = new Date();
 
   try {
-    await api.post('/comments', comment);
+    await store.dispatch('product/addComment', comment);
     emits('hide');
   } catch (e) {
     error.value = e;

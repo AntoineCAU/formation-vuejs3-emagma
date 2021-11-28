@@ -10,15 +10,14 @@
 </template>
 
 <script setup>
-import { ref, toRefs, computed } from 'vue';
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
 import { format } from '@/composables/useFormatPrice';
 
-const props = defineProps({
-  product: { type: Object, required: true },
-  qtyMax: { type: Number, default: 0 },
-});
+const store = useStore();
+const product = computed(() => store.state.product.item);
+const qtyMax = computed(() => store.getters['product/qtyMax']);
 
-const { product, qtyMax } = toRefs(props);
 const qty = ref(0);
 const total = computed(() => Math.round(qty.value * product.value.price));
 const increaseQty = () => qty.value = qty.value < qtyMax.value ? qty.value + 1 : qty.value;

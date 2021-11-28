@@ -1,23 +1,22 @@
 <template>
   <div v-if="product.colors.length">
-    <select name="color" @change="setColor">
-      <option>Couleur...</option>
-      <option
-        v-for="color in product.colors"
-        :key="color.id"
-        :value="color.id"
-      >{{ color.label }}</option>
-    </select>
+    <Selector :options="product.colors" @change="setColor">
+      <template #default>
+        <option value="">Couleur...</option>
+      </template>
+      <template #option="{ option }">
+        {{ option.label }}
+      </template>
+    </Selector>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import Selector from '@/components/Selector.vue';
 
 const store = useStore();
 const product = computed(() => store.state.product.item);
-const setColor = (value) => {
-  store.dispatch('product/setColor', value.target.value);
-}
+const setColor = (value) => store.dispatch('product/setColor', value.target.value);
 </script>

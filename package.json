@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "jest tests"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -19,7 +20,14 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/vue": "^6.5.0",
     "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/vue3-jest": "^27.0.0-alpha.3",
+    "babel-jest": "^27.3.1",
+    "core-js": "^3.19.1",
+    "jest": "^27.3.1",
     "vite": "^2.6.4"
   }
 }

@@ -26,27 +26,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import { formatDate } from '@/composables/useFormatDate.js';
 import ProductCommentForm from './ProductCommentForm.vue';
 
-export default {
-  props: {
-    product: { type: Object, required: true },
-  },
-  components: {
-    ProductCommentForm,
-  },
-  data() {
-    return {
-      showForm: true,
-    };
-  },
-  methods: {
-    formatDate(value) {
-      const date = new Date(value);
-
-      return date.toLocaleDateString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-    }
-  }
-}
+defineProps({
+  product: { type: Object, required: true },
+});
+const showForm = ref(true);
 </script>

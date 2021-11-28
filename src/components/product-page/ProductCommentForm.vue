@@ -39,39 +39,39 @@
   </form>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive } from 'vue';
 import { api } from '@/api';
 
-export default {
-  data() {
-    return {
-      comment: { comment: '', note: 5, author: '', productId: this.product.id },
-      error: null,
-    };
-  },
-  props: {
-    product: { type: Object, required: true },
-  },
-  methods: {
-    async submit() {
-      this.error = '';
-      if (!this.comment.author || !this.comment.comment) {
-        this.error = 'Merci de remplir tous les champs';
-        return;
-      }
-      this.comment.date = new Date();
+const props = defineProps({
+  product: { type: Object, required: true },
+});
 
-      try {
-        await api.post('/comments', this.comment);
-        this.$emit('hide');
-      } catch (e) {
-        this.error = e;
-      }
-    },
-    cancel() {
-      this.comment = { comment: '', note: 5, author: '', productId: this.product.id };
-      this.$emit('hide');
-    }
+const emits = defineEmits(['hide']);
+
+const emptyComment = { comment: '', note: 5, author: '', productId: props.product.id };
+let comment = reactive(emptyComment);
+const error = ref(null);
+
+const submit = async () => {
+  error.value = '';
+  if (!comment.author || !comment.comment) {
+    error.value = 'Merci de remplir tous les champs';
+    return;
   }
+
+  comment.date = new Date();
+
+  try {
+    await api.post('/comments', comment);
+    emits('hide');
+  } catch (e) {
+    error.value = e;
+  }
+};
+
+const cancel = () => {
+  comment = emptyComment;
+  emits('hide');
 };
 </script>

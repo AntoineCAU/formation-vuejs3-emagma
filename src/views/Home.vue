@@ -31,32 +31,18 @@
   </section>
 </template>
 
-<script>
+<script setup>
+import { computed, onMounted, ref } from 'vue';
 import { api } from '@/api';
 import ProductItem from '@/components/product-list/ProductItem.vue';
 
-export default {
-  components: {
-    ProductItem,
-  },
-  data() {
-    return {
-      featured: [],
-      imageUrl: 'https://picsum.photos/id/191/2246/749',
-      isFilteredInSale: false,
-      title: 'Bienvenue !',
-    };
-  },
-  async created() {
-    this.featured = await api.get('/products?featured=true&_embed=colors');
-  },
-  computed: {
-    filteredProducts() {
-      if (!this.isFilteredInSale) {
-        return this.featured;
-      }
-      return this.featured.filter((product) => product.inSale);
-    }
-  },
-}
+const featured = ref([]);
+const imageUrl = 'https://picsum.photos/id/191/2246/749';
+const title = 'Bienvenue !';
+const isFilteredInSale = ref(false);
+
+onMounted(async () => {
+  featured.value = await api.get('/products?featured=true&_embed=colors');
+});
+const filteredProducts = computed(() => !isFilteredInSale.value ? featured.value : featured.value.filter((product) => product.inSale));
 </script>

@@ -63,50 +63,36 @@
   </section>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, shallowRef, watch, toRef } from 'vue';
 import { api } from '@/api';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import ProductColors from '@/components/product-page/ProductColors.vue';
 import ProductComments from '@/components/product-page/ProductComments.vue';
 import ProductDetails from '@/components/product-page/ProductDetails.vue';
 import ProductQuantity from '@/components/product-page/ProductQuantity.vue';
-import ProductMixin from '@/mixins/ProductMixin.js';
+import { format } from '@/composables/useFormatPrice';
 
-export default {
-  components: {
-    Breadcrumbs,
-    ProductColors,
-    ProductComments,
-    ProductDetails,
-    ProductQuantity,
+const props = defineProps({
+  id: { type: String, required: true },
+});
+
+const activeTab = shallowRef(ProductDetails);
+const qtyMax = ref(0);
+const product = ref(null);
+const tabs = computed(() => {
+  const tabs = [{ label: 'Détails', component: ProductDetails }];
+  if (0 < product.value.comments.length) {
+    tabs.push({ label: 'Commentaires', component: ProductComments });
+  }
+  return tabs;
+});
+
+watch(
+  toRef(props, 'id'),
+  async () => {
+    product.value = await api.get(`/products/${props.id}?_embed=colors&_embed=comments&_expand=category`);
   },
-  mixins: [ProductMixin],
-  data() {
-    return {
-      activeTab: 'product-details',
-      product: null,
-      qtyMax: 0,
-    };
-  },
-  props: {
-    id: { type: String, required: true },
-  },
-  computed: {
-    tabs() {
-      const tabs = [{ label: 'Détails', component: 'product-details' }];
-      if (0 < this.product.comments.length) {
-        tabs.push({ label: 'Commentaires', component: 'product-comments' });
-      }
-      return tabs;
-    },
-  },
-  watch: {
-    id: {
-      async handler() {
-        this.product = await api.get(`/products/${ this.id }?_embed=colors&_embed=comments&_expand=category`);
-      },
-      immediate: true,
-    },
-  },
-}
+  { immediate: true },
+)
 </script>

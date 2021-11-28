@@ -44,15 +44,12 @@
   </div>
 </template>
 
-<script>
-import ProductMixin from '@/mixins/ProductMixin.js';
+<script setup>
+import { format } from '@/composables/useFormatPrice';
 
-export default {
-  props: {
-    product: { type: Object, required: true },
-  },
-  mixins: [ProductMixin],
-}
+defineProps({
+  product: { type: Object, required: true },
+});
 </script>
 
 <style lang="scss">

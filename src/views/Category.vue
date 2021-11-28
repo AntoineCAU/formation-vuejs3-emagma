@@ -20,33 +20,24 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, toRef, watch } from 'vue';
 import { api } from '@/api';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import ProductItem from '@/components/product-list/ProductItem.vue';
 
-export default {
-  components: {
-    ProductItem,
-    Breadcrumbs,
+const props = defineProps({
+  id: { type: String, required: true },
+});
+const category = ref(null);
+const products = ref([]);
+
+watch(
+  toRef(props, 'id'),
+  async () => {
+    category.value = await api.get(`/categories/${props.id}`);
+    products.value = await api.get(`/products?categoryId=${props.id}&_embed=colors`);
   },
-  data() {
-    return {
-      category: null,
-      products: [],
-    };
-  },
-  props: {
-    id: { type: String, required: true },
-  },
-  watch: {
-    id: {
-      async handler() {
-        this.category = await api.get(`/categories/${ this.id }`);
-        this.products = await api.get(`/products?categoryId=${ this.id }&_embed=colors`);
-      },
-      immediate: true,
-    },
-  },
-}
+  { immediate: true },
+)
 </script>

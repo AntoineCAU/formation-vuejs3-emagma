@@ -1,12 +1,12 @@
 <template>
   <template v-if="featured.length">
     <div class="is-flex is-align-items-baseline mb-4">
-      <h3 class="is-size-3">Produits à la une</h3>
+      <h3 class="is-size-3">{{ $t('featuredProducts') }}</h3>
       <button
         class="button is-primary ml-4"
         @click="isFilteredInSale = !isFilteredInSale"
       >
-        {{ isFilteredInSale ? 'Afficher tout' : 'Afficher uniquement les promos' }}
+        {{ isFilteredInSale ? $t('viewAll') : $t('viewSalesOnly') }}
       </button>
     </div>
 

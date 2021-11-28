@@ -14,7 +14,7 @@
     </div>
     <div v-else class="buttons is-centered">
       <a class="button is-rounded is-centered is-link">
-        Aucun résultat ici. Retour à la page d'accueil.
+        {{ $t('noResult') }}
       </a>
     </div>
   </div>

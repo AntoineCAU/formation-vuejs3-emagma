@@ -2,7 +2,7 @@
   <div>
     <button class="button is-primary is-light" @click="showForm = !showForm">
       <font-awesome-icon :icon="showForm ? 'comment-slash' : 'comment'" />
-      <span class="ml-2">{{ showForm ? 'Cacher' : 'Afficher' }} le formulaire de commentaire</span>
+      <span class="ml-2">{{ showForm ? $t('hideForm') : $t('showForm') }}</span>
     </button>
     <product-comment-form
       v-show="showForm"
@@ -16,7 +16,7 @@
       class="message is-dark"
     >
       <div class="message-header is-flex">
-        <p>{{ formatDate(comment.date) }}, par {{ comment.author }}</p>
+        <p>{{ $d(comment.date, 'long') }}, par {{ comment.author }}</p>
         <p>({{ comment.note }}/5)</p>
       </div>
       <div class="message-body">
@@ -29,7 +29,6 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
-import { formatDate } from '@/composables/useFormatDate.js';
 import ProductCommentForm from './ProductCommentForm.vue';
 
 const store = useStore();

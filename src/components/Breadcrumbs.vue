@@ -1,7 +1,7 @@
 <template>
   <nav class="breadcrumb" aria-label="breadcrumbs">
     <ul>
-      <li><router-link :to="{ name: 'homepage' }">Accueil</router-link></li>
+      <li><router-link :to="{ name: 'homepage' }">{{ $t('homepage') }}</router-link></li>
       <li v-if="parent">
         <router-link :to="parent.path">{{ parent.label }}</router-link>
       </li>

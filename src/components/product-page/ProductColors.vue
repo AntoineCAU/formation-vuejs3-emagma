@@ -2,7 +2,7 @@
   <div v-if="product.colors.length">
     <Selector :options="product.colors" @change="setColor">
       <template #default>
-        <option value="">Couleur...</option>
+        <option value="">{{ $t('color') }}...</option>
       </template>
       <template #option="{ option }">
         {{ option.label }}

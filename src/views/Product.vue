@@ -25,9 +25,9 @@
           <p class="title">{{ product.name }}</p>
           <div class="tags are-large">
             <span class="tag is-primary is-rounded">
-              {{ format(product.price) }}
+              {{ $n(product.price/100, 'currency') }}
             </span>
-            <span v-if="product.inSale" class="tag is-warning is-rounded">PROMO</span>
+            <span v-if="product.inSale" class="tag is-warning is-rounded">{{ $t('inSale') }}</span>
           </div>
         </div>
 
@@ -55,26 +55,29 @@
 
 <script setup>
 import { computed, shallowRef, watch, toRef } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import ProductColors from '@/components/product-page/ProductColors.vue';
 import ProductComments from '@/components/product-page/ProductComments.vue';
 import ProductDetails from '@/components/product-page/ProductDetails.vue';
 import ProductQuantity from '@/components/product-page/ProductQuantity.vue';
-import { format } from '@/composables/useFormatPrice';
 
 const props = defineProps({
   id: { type: String, required: true },
 });
 
 const store = useStore();
+const { t } = useI18n();
 const product = computed(() => store.state.product.item);
 
 const activeTab = shallowRef(ProductDetails);
 const tabs = computed(() => {
-  const tabs = [{ label: 'Détails', component: ProductDetails }];
+  const tabs = [{ label: t('details'), component: ProductDetails }];
   if (0 < product.value.comments.length) {
-    tabs.push({ label: 'Commentaires', component: ProductComments });
+    tabs.push({
+      label: t('comments', { num: product.value.comments.length }),
+      component: ProductComments });
   }
   return tabs;
 });

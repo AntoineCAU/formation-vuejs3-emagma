@@ -2,14 +2,14 @@
   <form class="box mt-2" @submit.prevent="submit" @reset="cancel">
     <div class="notification is-danger" v-if="error">{{ error }}</div>
     <div class="field">
-      <label class="label">Nom</label>
+      <label class="label">{{ $t('name') }}</label>
       <div class="control">
         <input class="input" type="text" placeholder="John Doe" v-model="comment.author">
       </div>
     </div>
 
     <div class="control is-flex">
-      <label class="label">Votre note</label>
+      <label class="label">{{ $t('stars') }}</label>
       <div class="ml-2">
         <font-awesome-icon
           icon="star"
@@ -22,7 +22,7 @@
     </div>
 
     <div class="field">
-      <label class="label">Commentaire</label>
+      <label class="label">{{ $t('comment') }}</label>
       <div class="control">
         <textarea class="textarea" v-model="comment.comment"></textarea>
       </div>
@@ -30,10 +30,10 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link" type="submit">Envoyer</button>
+        <button class="button is-link" type="submit">{{ $t('submit') }}</button>
       </div>
       <div class="control">
-        <button class="button is-link is-light" type="reset">Annuler</button>
+        <button class="button is-link is-light" type="reset">{{ $t('cancel') }}</button>
       </div>
     </div>
   </form>
@@ -41,6 +41,7 @@
 
 <script setup>
 import { computed, ref, reactive } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 
 const store = useStore();
@@ -50,11 +51,12 @@ const emits = defineEmits(['hide']);
 const emptyComment = { comment: '', note: 5, author: '' };
 let comment = reactive(emptyComment);
 const error = ref(null);
+const { t } = useI18n();
 
 const submit = async () => {
   error.value = '';
   if (!comment.author || !comment.comment) {
-    error.value = 'Merci de remplir tous les champs';
+    error.value = t('pleaseFillTheForm');
     return;
   }
 

@@ -19,9 +19,9 @@
 
             <div class="tags are-large is-pulled-right">
               <span class="tag is-primary is-rounded">
-                {{ format(product.price) }}
+                {{ $n(product.price/100, 'currency') }}
               </span>
-              <span v-if="product.inSale" class="tag is-warning is-rounded">PROMO</span>
+              <span v-if="product.inSale" class="tag is-warning is-rounded">{{ $t('inSale') }}</span>
             </div>
           </div>
         </div>
@@ -45,8 +45,6 @@
 </template>
 
 <script setup>
-import { format } from '@/composables/useFormatPrice';
-
 defineProps({
   product: { type: Object, required: true },
 });

@@ -2,7 +2,8 @@
   <nav class="navbar is-fixed-top is-dark">
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-start">
-        <router-link class="navbar-item" :to="{ name: 'homepage' }">Accueil</router-link>
+        <router-link class="navbar-item" :to="{ name: 'homepage' }">{{ $t('homepage')
+          }}</router-link>
         <router-link
           v-for="category in categories"
           :key="category.id"
@@ -16,8 +17,8 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <div class="button is-primary is-small">Mon panier</div>
-            <div class="button is-white is-small">Mon compte</div>
+            <div class="button is-primary is-small">{{ $t('cart') }}</div>
+            <div class="button is-white is-small">{{ $t('account') }}</div>
           </div>
         </div>
       </div>

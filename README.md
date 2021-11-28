@@ -1,14 +1,13 @@
 # Formation EMAGMA - Vue 3 + Vite
 
-## step11-tests
+## step12-i18n
 
 ### Objectifs
 
-- Mise en place des tests 
-  - `npm install --save-dev "core-js@3" "@babel/preset-env" "@testing-library/jest-dom@5" 
-    "@testing-library/vue@6" "babel-jest@27" "jest@27" "@vue/vue3-jest"` (attention aux versions...)
-  - Nouvelle commande `test` à ajouter dans `./package.json`
-  - Config `./babel.config.js`
-  - Config `./jest.config.js`
-- Ajout de plusieurs tests unitaires dans `tests/`
-- Lancement des tests `npm run test`
+- Ajout de la lib d'internationalisation 
+  - `npm install vue-i18n@next`
+  - Fichier de traduction `src/i18n.js`
+  - Ajout de la lib d'internationalisation de façon globale `src/main.js`
+- Utilisation des traductions dans les différents composants
+- Suppression du composable `useFormatPrice.js`
+- Suppression du composable `useFormatDate.js`

@@ -55,8 +55,8 @@
   </section>
 </template>
 
-<script setup>
-import { computed, shallowRef, watch, toRef } from 'vue';
+<script setup lang="ts">
+import { computed, shallowRef, watch, toRef, ComputedRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
@@ -64,21 +64,20 @@ import ProductColors from '@/components/product-page/ProductColors.vue';
 import ProductComments from '@/components/product-page/ProductComments.vue';
 import ProductDetails from '@/components/product-page/ProductDetails.vue';
 import ProductQuantity from '@/components/product-page/ProductQuantity.vue';
+import { IProduct } from "@/interfaces/Product";
 
-const props = defineProps({
-  id: { type: String, required: true },
-});
+const props = defineProps<{ id: string }>();
 
 const store = useStore();
 const { t } = useI18n();
-const product = computed(() => store.state.product.item);
+const product: ComputedRef<IProduct> = computed(() => store.state.product.item);
 
 const activeTab = shallowRef(ProductDetails);
 const tabs = computed(() => {
   const tabs = [{ label: t('details'), component: ProductDetails }];
-  if (0 < product.value.comments.length) {
+  if (!!product.value.comments?.length) {
     tabs.push({
-      label: t('comments', { num: product.value.comments.length }),
+      label: t('comments', { num: product.value.comments!.length }),
       component: ProductComments });
   }
   return tabs;

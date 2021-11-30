@@ -44,10 +44,10 @@
   </div>
 </template>
 
-<script setup>
-defineProps({
-  product: { type: Object, required: true },
-});
+<script setup lang="ts">
+import { IProduct } from "@/interfaces/Product";
+
+defineProps<{ product: IProduct }>();
 </script>
 
 <style lang="scss">

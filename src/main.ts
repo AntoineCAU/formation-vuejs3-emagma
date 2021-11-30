@@ -3,8 +3,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import App from '@/App.vue';
-import { i18n } from '@/i18n.js';
-import { router } from '@/router.js';
+import { i18n } from '@/i18n';
+import { router } from '@/router';
 import { store } from '@/store';
 
 library.add(fas);
